@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify
 from flask_jwt_extended import JWTManager, jwt_required
 from src.database.redisConnect import connect
 
-main = Blueprint('index_blueprint', __name__)
+main = Blueprint('message_blueprint', __name__)
 
 jwt = JWTManager()
 
