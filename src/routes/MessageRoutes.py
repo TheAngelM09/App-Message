@@ -17,5 +17,5 @@ def check_if_token_is_revoked(jwt_header, jwt_payload: dict):
 @main.route('/')
 @jwt_required()
 def home():
-    return jsonify('Hello Word!')
+    return jsonify('Views Message')
 

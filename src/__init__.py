@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
-from .routes import IndexRoutes
+from .routes import IndexRoutes, MessageRoutes
 
 app = Flask(__name__)
 
@@ -10,5 +10,6 @@ def init_app(config):
     app.config.from_object(config)
 
     app.register_blueprint(IndexRoutes.main, url_prefix='/')
+    app.register_blueprint(MessageRoutes.main, url_prefix='/msg')
 
     return app
