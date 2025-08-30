@@ -1,5 +1,4 @@
-from flask import Blueprint, jsonify
-from flask_jwt_extended import JWTManager, jwt_required
+from flask import Blueprint, jsonify, render_template
 from src.database.redisConnect import connect
 
 main = Blueprint('index_blueprint', __name__)
@@ -15,7 +14,7 @@ def check_if_token_is_revoked(jwt_header, jwt_payload: dict):
     return token_in_redis is not None
 
 @main.route('/')
-@jwt_required()
+#@jwt_required()
 def home():
-    return jsonify('Hello Word!')
+    return render_template("demo.html")
 
