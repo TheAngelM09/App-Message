@@ -32,9 +32,9 @@ def msg_ws():
     if request.method == 'POST':
         data = request.json
         message = {
-            'id': data["entry"][0]["changes"][0]["value"]["messages"][0]["id"],
+            'telf': data["entry"][0]["changes"][0]["value"]["messages"][0]["from"],
             'name': data["entry"][0]["changes"][0]["value"]["contacts"][0]["profile"]["name"],
             'msj': data["entry"][0]["changes"][0]["value"]["messages"][0]["text"]["body"],
-            'telf': data["entry"][0]["changes"][0]["value"]["messages"][0]["from"],
+            'time': data["entry"][0]["changes"][0]["value"]["messages"][0]["timestamp"]
         }
         return jsonify(message)
