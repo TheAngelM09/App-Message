@@ -1,3 +1,57 @@
+document.addEventListener('DOMContentLoaded', function(){
+    const phone = "584121234567"
+    getConversation(phone)
+});
+
+function getTime(timestamp){
+    const date = new Date(timestamp);
+    const time = `${date.getHours()}:${date.getMinutes()}`
+    return time
+};
+
+function getConversation(phone){
+    $.ajax({
+        url: `/conv/get?phone=${phone}`,
+        type: "GET",
+        success: function(response){
+            let message = "";
+            response[0].forEach(msg => {
+                if(msg["type"] == "company"){
+                    message += `<div class="row message-body">
+                        <div class="col-sm-12 message-main-receiver">
+                            <div class="receiver">
+                            <div class="message-text">
+                        ${msg["message"]}
+                            </div>
+                            <span class="message-time pull-right">
+                                ${getTime(msg["timestamp"])}
+                            </span>
+                            </div>
+                        </div>
+                    </div>`
+                }else{
+                    message += `<div class="row message-body">
+                        <div class="col-sm-12 message-main-sender">
+                            <div class="sender">
+                            <div class="message-text">
+                        ${msg["message"]}
+                            </div>
+                            <span class="message-time pull-right">
+                                ${getTime(msg["timestamp"])}
+                            </span>
+                            </div>
+                        </div>
+                    </div>`
+                }
+            });
+            $("#body_message").html(message)           
+        },
+        error: function(xhr){
+            console.error("Error: ", xhr.responseText);
+        }
+    });
+}
+
 $("#send").click(function(){
     let message = {
         object: "whatsapp_business_account",
@@ -43,7 +97,7 @@ $("#send").click(function(){
         url: "/msg/ws",
         type: "POST",
         data: JSON.stringify(message),
-        contentType: "application/JSON",
+        contentType: "application/json",
         success: function(response){
             console.log(response);
         },
