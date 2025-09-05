@@ -21,10 +21,11 @@ def check_if_token_is_revoked(jwt_header, jwt_payload: dict):
 @main.route('/get', methods=['GET'])
 #@jwt_required()
 def get_conversations():
+    company = request.args.get("company")
     phone = request.args.get("phone")
     db = get_connection()
     if phone is not None:
-        response = ConversationModel.get(db, phone)
+        response = ConversationModel.get(db, company,phone)
         if response is not None:
             return jsonify(response)
         else: 

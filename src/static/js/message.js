@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function(){
     const phone = "584121234567"
-    getConversation(phone)
+    const company = "1"
+    getConversation(company, phone)
 });
 
 function getTime(timestamp){
@@ -9,9 +10,9 @@ function getTime(timestamp){
     return time
 };
 
-function getConversation(phone){
+function getConversation(company, phone){
     $.ajax({
-        url: `/conv/get?phone=${phone}`,
+        url: `/conv/get?company=${company}&phone=${phone}`,
         type: "GET",
         success: function(response){
             let message = "";
@@ -63,7 +64,7 @@ $("#send").click(function(){
                         value: {
                             messaging_product: "whatsapp",
                             metadata: {
-                                display_phone_number: "584241234567",
+                                display_phone_number: "584121234567",
                                 phone_number_id: "133711623159384"
                             },
                             contacts: [
@@ -71,12 +72,12 @@ $("#send").click(function(){
                                     profile: {
                                         name: "John Doe"
                                     },
-                                    wa_id: "584241234567"
+                                    wa_id: "584121234567"
                                 }
                             ],
                             messages: [
                                 {
-                                    from: "51938592888",
+                                    from: "584121234567",
                                     id: "wamid.HBgLNTE5NzAyNDQwMjYVAgASGCAyOUE5OTI1RjZDRUMyODZCQzQxRTg0N0RFQTRGREFBQwA=",
                                     timestamp: Date.now(),
                                     text: {
